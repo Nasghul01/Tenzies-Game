@@ -22,10 +22,15 @@ function App() {
     setDice(allNewDice())
   }
 
+  function holdDice (id) {
+    console.log(id)
+  }
+
   const diceElement = dice.map(die => (
     <Die key={die.id} 
     value={die.value} 
-    isHeld= {die.isHeld}/>
+    isHeld= {die.isHeld}
+    holdDice = {() => holdDice(die.id)}/>
   ))
 
   return (
