@@ -7,6 +7,7 @@ function App() {
 
   const [dice, setDice] = useState(allNewDice())
   const [tenzies, setTenZies] = useState(false)
+  const [data, setData] =useState([])
 
   useEffect(() => {
     const allHeld = dice.every(die => die.isHeld)
@@ -19,6 +20,7 @@ function App() {
 
 
   }, [dice])
+
 
   function allNewDice() {
     const newDice = []
