@@ -7,7 +7,7 @@ function App() {
 
   const [dice, setDice] = useState(allNewDice())
   const [tenzies, setTenZies] = useState(false)
-  const [data, setData] =useState([])
+  const [num , setNum] = useState(0)
 
   useEffect(() => {
     const allHeld = dice.every(die => die.isHeld)
@@ -16,6 +16,7 @@ function App() {
 
     if (allHeld && allSameValue){
       setTenZies(true)
+      setNum(0)
     }
 
 
@@ -55,9 +56,10 @@ function App() {
   }
 
 
-  function holdDice (id) {
+  function holdDice (id, dicenum) {
+    setNum(prevNum => prevNum === 0 ? dicenum : prevNum)
     setDice(oldDice => oldDice.map( die => {
-      return die.id === id ? 
+      return die.id === id && die.value === num ? 
       {...die, isHeld: !die.isHeld} : die
     }))
   }
@@ -66,7 +68,7 @@ function App() {
     <Die key={die.id} 
     value={die.value} 
     isHeld= {die.isHeld}
-    holdDice = {() => holdDice(die.id)}/>
+    holdDice = {() => holdDice(die.id, die.value)}/>
   ))
 
   return (
